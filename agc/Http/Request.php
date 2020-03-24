@@ -37,11 +37,11 @@ class Request
         return $this;
     }
 
-    public function get($name)
+    public function get($name, $default = null)
     {
         if ($this->has($name)) {
             return $_REQUEST[$name];
         }
-        return null;
+        return $default;
     }
 }

@@ -3,6 +3,7 @@
 namespace Agc;
 
 use Agc\Controller\AttachmentController;
+use Agc\Controller\DashboardController;
 use Agc\Controller\PostController;
 use Agc\Controller\VerifyController;
 use Agc\Repositories\RouteRepository as Route;
@@ -20,9 +21,9 @@ class Application
         $route->add('attachment', AttachmentController::class);
     }
 
-    public function createWordpressForm()
+    public function createInterface()
     {
-        add_action('admin_menu', [$this, 'buildAgcAdminMenu']);
+        (new DashboardController())->handle();
     }
 
     public function generateWelcomeToken()
@@ -47,13 +48,4 @@ class Application
         echo '<div class="error"><p>' . $this->error_message . '</p></div>';
     }
 
-    public function buildAgcAdminMenu()
-    {
-        add_menu_page('AGC Manager', 'AGC Manager', 'manage_options', 'agcmanager_index', [$this, 'agcmanager_index'], null, 1);
-    }
-
-    public function agcmanager_index()
-    {
-        echo "Your token is " . (new TokenRepository())->get();
-    }
 }

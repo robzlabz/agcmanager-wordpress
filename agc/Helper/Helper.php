@@ -21,3 +21,8 @@ function info($message, $data = [])
 {
     (new LogRepository())->info($message, $data);
 }
+
+function fatal($message, $data = [])
+{
+    (new LogRepository())->error($message, $data);
+}
