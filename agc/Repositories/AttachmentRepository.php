@@ -11,10 +11,7 @@ class AttachmentRepository
         $this->generateThumbnail($post_id, $attachment_id);
 
         if (is_wp_error($attachment_id)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $attachment_id->get_error_message()
-            ], 401);
+            return response()->error($post_id->get_error_message());
         }
 
         return $attachment_id;
@@ -46,10 +43,7 @@ class AttachmentRepository
         ];
         $attachment_id = wp_insert_attachment($attachment_array, $path, $post_id, true);
         if (is_wp_error($attachment_id)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $attachment_id->get_error_message()
-            ], 401);
+            return response()->error($post_id->get_error_message());
         }
 
         require_once(ABSPATH . 'wp-admin/includes/image.php');
@@ -64,5 +58,10 @@ class AttachmentRepository
     private function generateThumbnail($post_id, $attachment_id)
     {
         set_post_thumbnail($post_id, $attachment_id);
+    }
+
+    public function count()
+    {
+        return wp_count_posts('attachment');
     }
 }

@@ -4,12 +4,12 @@ use Agc\Http\Request;
 use Agc\Http\Response;
 use Agc\Repositories\LogRepository;
 
-function request($name = null)
+function request($name = null, $default = null)
 {
     if ($name == null) {
         return (new Request());
     }
-    return (new Request())->get($name);
+    return (new Request())->get($name, $default);
 }
 
 function response()

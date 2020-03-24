@@ -5,6 +5,7 @@ namespace Agc;
 use Agc\Controller\AttachmentController;
 use Agc\Controller\DashboardController;
 use Agc\Controller\PostController;
+use Agc\Controller\RemoteController;
 use Agc\Controller\VerifyController;
 use Agc\Repositories\RouteRepository as Route;
 use Agc\Repositories\TokenRepository;
@@ -19,6 +20,7 @@ class Application
         $route->add('verify', VerifyController::class);
         $route->add('post', PostController::class);
         $route->add('attachment', AttachmentController::class);
+        $route->add('remote', RemoteController::class);
     }
 
     public function createInterface()

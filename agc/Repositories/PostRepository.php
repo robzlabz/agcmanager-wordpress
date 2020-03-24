@@ -18,7 +18,7 @@ class PostRepository
 
         $post_id = wp_insert_post($post_array, true);
         if (is_wp_error($post_id)) {
-            return response()->json(['status' => 'error', 'message' => $post_id->get_error_message()]);
+            return response()->error($post_id->get_error_message());
         }
 
         return $post_id;
@@ -50,14 +50,36 @@ class PostRepository
 
     public function setStatus($post_id, $status)
     {
-        // update status by post_id
+        $post_id = wp_update_post([
+            'ID' => $post_id,
+            'status' => $status
+        ], true);
+
+        if (is_wp_error($post_id)) {
+            return response()->error($post_id->get_error_message());
+        }
+        return $post_id;
     }
 
     public function addContent($post_id, $content)
     {
-        // get current content
-        // add new content
-        // save content
-        // return true if any changes
+        $post_content = get_post_field('post_content', $post_id);
+        $_content = $post_content . $content;
+
+        $post_id = wp_update_post([
+            'ID' => $post_id,
+            'post_content' => $_content
+        ], true);
+
+        if (is_wp_error($post_id)) {
+            return response()->error($post_id->get_error_message());
+        }
+
+        return $post_id;
+    }
+
+    public function count()
+    {
+        return wp_count_posts('post');
     }
 }
