@@ -1,0 +1,24 @@
+{
+  "name": "robzlabz/agcmanager-wordpress",
+  "description": "Agcmanager Plugin Receiver",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Robbyn Rahmandaru",
+      "email": "robzlabz@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Agc\\": "agc/"
+    },
+    "files": [
+      "./agc/Helper/Helper.php"
+    ]
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "ext-json": "*",
+    "ext-curl": "*"
+  }
+}
