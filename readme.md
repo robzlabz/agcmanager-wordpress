@@ -30,8 +30,8 @@ Response
 
 ``` json
 {
-    status:"match",
-    message:"Valid token"
+    status: "match",
+    message: "Valid token"
 }
 ```
 
@@ -52,9 +52,9 @@ Response
 
 ```json
 {
-    post_id:32,
-    status:"success",
-    message:"post #32 is created"
+    post_id: 32,
+    status: "success",
+    message: "post #32 is created"
 }
 ```
 
@@ -75,9 +75,9 @@ Response
 
 ```json
 {
-    attachment_id:32,
-    status:"success",
-    message:"Attachment #32 is created"
+    attachment_id: 32,
+    status: "success",
+    message: "Attachment #32 is created"
 }
 ```
 
