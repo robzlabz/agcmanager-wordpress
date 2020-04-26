@@ -39,7 +39,6 @@ class AttachmentRepository
             'post_title' => $title,
             'post_excerpt' => $title,
             'post_status' => 'inherit',
-            'post_content' => $content,
         ];
         $attachment_id = wp_insert_attachment($attachment_array, $path, $post_id, true);
         if (is_wp_error($attachment_id)) {
@@ -51,6 +50,11 @@ class AttachmentRepository
         info('attach data', [$attachment_id, $metadata]);
         info('path', [$path]);
         wp_update_attachment_metadata($attachment_id, $metadata);
+
+        $image_url = wp_get_attachment_image($attachment_id, 'full', false, ['alt' => $title]);
+        $content = str_replace('[image]', $image_url, $content);
+
+        (new PostRepository)->addContent($post_id, $content);
 
         return $attachment_id;
     }
